@@ -10,11 +10,13 @@ class CreateRatingsTable extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('feedback');
-            $table->unsignedTinyInteger('stars');
-            $table->string('link')->nullable();
+            $table->foreignId('article_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->tinyInteger('rating'); // 1-5
             $table->timestamps();
+            
+            $table->unique(['article_id', 'user_id']); // Prevent duplicate ratings
+        
         });
     }
 

@@ -4,13 +4,26 @@ namespace App\ApiHelper;
 
 class ApiResponseCodes
 {
+    public const HTTP_SUCCESS = 200;
+    public const HTTP_CREATED = 201;
+    public const HTTP_BAD_REQUEST = 400;
+    public const HTTP_UNAUTHORIZED = 401;
+    public const HTTP_FORBIDDEN = 403;
+    public const HTTP_NOT_FOUND = 404;
+    public const HTTP_SERVER_ERROR = 500;
+
+    // Business Error Codes (should be > 1000 to avoid confusion)
+    public const BUSINESS_ERROR_BASE = 1000;
+    public const INVALID_CREDENTIALS = 1001;
+    public const VALIDATION_ERROR = 1002;
     public const SUCCESS = 200;
+    public const INVALID_REQUEST=403;
 
     public const CREATED = 201;
 
     public const SOMETHING_WENT_WRONG = 250;
 
-    public const INVALID_CREDENTIALS = 251; // phone not exists, password not match
+   
 
     public const USER_INACTIVE = 258; // GLOBAL OR FOR SPECIFIC ACCOUNT
 
@@ -38,7 +51,7 @@ class ApiResponseCodes
 
     public const USER_NOT_EXISTS = 265;
 
-    public const VALIDATION_ERROR = 252;
+   
 
     public const PHONE_ALREADY_VERIFIED = 253;
 
