@@ -1,9 +1,5 @@
 FROM richarvey/nginx-php-fpm:3.1.6
 
-# Install PostgreSQL dependencies
-RUN apt-get update && apt-get install -y libpq-dev \
-    && docker-php-ext-install pdo pdo_pgsql
-
 WORKDIR /var/www/html
 
 # Copy composer files first for caching
