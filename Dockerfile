@@ -2,9 +2,7 @@ FROM richarvey/nginx-php-fpm:3.1.6
 
 WORKDIR /var/www/html
 
-# Copy composer files first for caching
-COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader
+
 
 # Copy application
 COPY . .
@@ -34,6 +32,6 @@ RUN chmod -R 775 storage bootstrap/cache
 
 # Generate key and run migrations
 RUN php artisan key:generate && \
-    php artisan migrate --force
+    php artisan migrate --seed --force
 
 CMD ["/start.sh"]
