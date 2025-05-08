@@ -1,9 +1,9 @@
 FROM richarvey/nginx-php-fpm:3.1.6
 
-RUN git clone https://github.com/frzfrsfra3/backend_devteam.git /tmp
+RUN git clone https://github.com/frzfrsfra3/backend_devteam.git /tmp/backend
 
 RUN ls -la  
-RUN mv /tmp/backend_devteam/{*,.*} .
+RUN mv /tmp/backend/{*,.*} .
 # Image config
 ENV SKIP_COMPOSER 1
 ENV WEBROOT /var/www/html/public
