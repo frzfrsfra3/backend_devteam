@@ -31,7 +31,9 @@ RUN chown -R www-data:www-data storage bootstrap/cache
 RUN chmod -R 775 storage bootstrap/cache
 
 # Generate key and run migrations
-RUN php artisan key:generate 
-RUN php artisan migrate --seed --force
+RUN if [ -n "$DB_HOST" ]; then \
+      php artisan key:generate && \
+      php artisan migrate --seed --force; \
+    fi
 
 CMD ["/start.sh"]
