@@ -16,7 +16,7 @@ The Articles API includes the following features:
 
 #### •	Articled Management:
 
- Creating,Rating and Exploring operations for Articless.
+ CRUD,Rating and Exploring operations for Articles.
 
 ## Installation and Setup
 Follow these steps to set up and run the project locally:
