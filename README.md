@@ -9,18 +9,14 @@ This README.md provides an overview of the API, database setup, code review, and
   #### 4. API Endpoints 
   
 # Project Overview
-The e-commerce API includes the following features:
+The Articles API includes the following features:
 
 #### •	User Registration and Authentication:
  Secure user registration and JWT-based authentication.
 
-#### •	Product Management:
+#### •	Articled Management:
 
- CRUD operations for products.
-
-
-#### •	Order Management: 
-Ability to place orders with one or multiple products.
+ Creating,Rating and Exploring operations for Articless.
 
 ## Installation and Setup
 Follow these steps to set up and run the project locally:
@@ -98,12 +94,6 @@ o	Request Body:
 
 o	Response: 200 OK with JWT token.
 
-#### •	Get User Details
-o	GET /api/user
-
-o	Headers: Authorization: Bearer {token}
-
-o	Response: 200 OK with user details.
 
 #### •	Logout
 
