@@ -42,8 +42,8 @@ class ArticleRepository extends BaseRepositoryImplementation implements ArticleI
         $data = $validator->validated();
         $data['author_id'] = Auth::id();
 
-        $article = $this->model->create($data);
-
+        $article = $this->model->with(['visibilityDays', 'ratings'])->create($data);
+        $article->load(['author','visibilityDays', 'ratings']);
         foreach ($data['visible_days'] as $day) {
             ArticleVisibilityDay::create([
                 'article_id' => $article->id,
@@ -56,7 +56,7 @@ class ArticleRepository extends BaseRepositoryImplementation implements ArticleI
 
     public function updateArticle(Request $request, $id)
     {
-        $article = Article::findOrFail($id);
+        $article =$this->model->findOrFail($id);
     
         if ($article->author_id !== Auth::id()) {
             return ApiResponseHelper::error(
@@ -105,7 +105,7 @@ class ArticleRepository extends BaseRepositoryImplementation implements ArticleI
 
     public function deleteArticle($id)
     {
-        $article = Article::findOrFail($id);
+        $article = $this->model->findOrFail($id);
 
         if ($article->author_id !== Auth::id()) {
             return ApiResponseHelper::error(
@@ -123,7 +123,7 @@ class ArticleRepository extends BaseRepositoryImplementation implements ArticleI
 
     public function getArticle($id)
     {
-        $article = Article::with('ratings')->findOrFail($id);
+        $article = $this->model->with('ratings')->findOrFail($id);
         $article->average_rating = $article->ratings()->avg('rating');
 
         return ApiResponseHelper::sendResponse(new Result($article, 'Article retrieved'));
@@ -139,7 +139,7 @@ class ArticleRepository extends BaseRepositoryImplementation implements ArticleI
     {
         $today = Carbon::now()->dayOfWeek;
         
-        $query = Article::whereHas('visibilityDays', fn ($q) =>
+        $query = $this->model->whereHas('visibilityDays', fn ($q) =>
             $q->where('day_of_week', $today)
         )->with(['author', 'ratings']);
     
@@ -157,7 +157,7 @@ class ArticleRepository extends BaseRepositoryImplementation implements ArticleI
 
     public function rateArticle(Request $request, $id)
     {
-        $article = Article::findOrFail($id);
+        $article = $this->model->findOrFail($id);
 
         if ($article->author_id === Auth::id()) {
             return ApiResponseHelper::error(
