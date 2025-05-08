@@ -1,7 +1,9 @@
 FROM richarvey/nginx-php-fpm:3.1.6
 
-RUN git clone https://github.com/frzfrsfra3/backend_devteam.git /tmp/backend && mv /tmp/backend/{*,.*} .
-
+# RUN git clone https://github.com/frzfrsfra3/backend_devteam.git /tmp/backend && mv /tmp/backend/{*,.*} .
+RUN git clone https://github.com/frzfrsfra3/backend_devteam.git /tmp/repo && \
+    cp -RTf /tmp/repo/ . && \
+    rm -rf /tmp/repo
 RUN ls -la  
 
 # Image config
