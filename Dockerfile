@@ -33,7 +33,7 @@ RUN chmod -R 775 storage bootstrap/cache
 # Generate key and run migrations
 RUN if [ -n "$DB_HOST" ]; then \
       php artisan key:generate && \
-      php artisan migrate --seed --force; \
+      php artisan migrate --force; \
     fi
 
 CMD ["/start.sh"]
