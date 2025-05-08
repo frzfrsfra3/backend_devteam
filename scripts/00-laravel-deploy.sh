@@ -7,6 +7,7 @@ composer install --no-dev
 
 echo "generating application key..."
 php artisan key:generate --show
+php artisan jwt:secret --show 
 
 echo "Caching config..."
 php artisan config:cache
